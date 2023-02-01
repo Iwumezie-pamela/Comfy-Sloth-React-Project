@@ -14,7 +14,7 @@ export const links = [
   {
     id: 3,
     text: 'products',
-    url: '/products',
+    url: '/product',
   },
 ]
 
