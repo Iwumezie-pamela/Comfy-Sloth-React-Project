@@ -5,7 +5,12 @@ import { Link } from 'react-router-dom'
 import { CartContent, PageHero } from '../components'
 
 const CartPage = () => {
-  return <h4>cart page</h4>
+  return (
+    <Wrapper>
+      <PageHero title="cart" />
+      <div className="section page section-center">cart page</div>
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.main`

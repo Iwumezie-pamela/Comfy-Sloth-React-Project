@@ -20,14 +20,14 @@ function App() {
       <Navbar />
       <Sidebar /> {/*for small screen*/}
       <Routes>
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/about" element={<AboutPage/>} />
-        <Route path="/cart" element={<CartPage/>} />
-        <Route path="/checkout" element={<CheckoutPage/>} />
-        <Route path="/private" element={<PrivateRoute/>} />
-        <Route path="/product" element={<ProductsPage/>} />
-        <Route path="/products/:id" element={<SingleProductPage/>} />
-        <Route path="*" element={<ErrorPage/>} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/private" element={<PrivateRoute />} />
+        <Route path="/product" element={<ProductsPage />} />
+        <Route path="/products/:id" element={<SingleProductPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

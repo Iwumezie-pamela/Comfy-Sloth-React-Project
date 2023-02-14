@@ -5,8 +5,68 @@ import { FaCheck } from 'react-icons/fa'
 import { useCartContext } from '../context/cart_context'
 import AmountButtons from './AmountButtons'
 
-const AddToCart = () => {
-  return <h4>addToCart </h4>
+const AddToCart = ({ singleProductPage }) => {
+  //it controls the colors and also the number of product in stock meaning a buyer cannot buy more than what is available
+  const { id, stock, colors } = singleProductPage
+
+  const [mainColors, setMainColors] = useState(colors[0])
+  const [amount, setAmount] = useState(1)
+
+  const handlePlus = () => {
+    //handles the number of stock available so the customer won't order more than the available items in stock
+    setAmount((prevAmount) => {
+      let tempAmount = prevAmount + 1
+      if (tempAmount >= stock) {
+        tempAmount = stock
+      }
+      return tempAmount
+    })
+  }
+  const handleMinus = () => {
+    //since there is no point in having 0 so if tempAmount is less than 1,tempAmount would be equal to 1
+    setAmount((prevAmount) => {
+      let tempAmount = prevAmount - 1
+      if (tempAmount < 1) {
+        tempAmount = 1
+      }
+      return tempAmount
+    })
+  }
+
+  return (
+    <Wrapper>
+      <div className='colors'>
+        <span>Colors : </span>
+        <div>
+          {colors.map((color, index) => {
+            return (
+              <button
+                className={`${
+                  color === mainColors ? 'active color-btn' : 'color-btn'
+                }`}
+                key={index}
+                style={{ backgroundColor: color }}
+                onClick={() => setMainColors(color)}
+              >
+                {color === mainColors ? <FaCheck /> : null}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      <div className='btn-container'>
+        <AmountButtons
+          amount={amount}
+          handleMinus={handleMinus}
+          handlePlus={handlePlus}
+        />
+        <Link to='/cart' className='btn'>
+          Add to cart
+        </Link>
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.section`

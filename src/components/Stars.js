@@ -1,13 +1,39 @@
-import React from 'react'
-import styled from 'styled-components'
-import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs'
-const Stars = () => {
-  return <h4>stars</h4>
-}
+import React from "react";
+import styled from "styled-components";
+import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+
+const Stars = ({ stars, reviews }) => {
+  /* ARRAY APPROACH */
+
+  const getStars = Array.from({ length: 5 }, (_, index) => {
+    // _ represents elemnt but it wasn't added because it wasn't needed
+    const numbers = index + 0.5; //go  get half stars
+    return (
+      <span key={index}>
+        {stars >= index + 1 ? (
+          <BsStarFill />
+        ) : stars >= numbers ? (
+          <BsStarHalf />
+        ) : (
+          <BsStar />
+        )}
+      </span>
+    );
+  });
+
+  return (
+    <Wrapper>
+      <div className="stars">{getStars}</div>
+      <span></span>
+      <p className="reviews">({reviews} customer reviews)</p>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+
   span {
     color: #ffb900;
     font-size: 1rem;
@@ -18,5 +44,67 @@ const Wrapper = styled.div`
     margin-bottom: 0;
   }
   margin-bottom: 0.5rem;
-`
-export default Stars
+`;
+export default Stars;
+
+//  MANUAL APPROACH
+//         {/* star */}
+//         <span>
+
+//           {stars >= 1 ? (
+//             <BsStarFill />
+//           ) : stars >= 0.5 ? (
+//             <BsStarHalf />
+//           ) : (
+//             <BsStar />
+//           )}
+//         </span>
+//         {/* end of star */}
+
+//         {/* star */}
+//         <span>
+//           {stars >= 2 ? (
+//             <BsStarFill />
+//           ) : stars >= 1.5 ? (
+//             <BsStarHalf />
+//           ) : (
+//             <BsStar />
+//           )}
+//         </span>
+//         {/* end of star */}
+
+//         {/* star */}
+//         <span>
+//           {stars >= 3 ? (
+//             <BsStarFill />
+//           ) : stars >= 2.5 ? (
+//             <BsStarHalf />
+//           ) : (
+//             <BsStar />
+//           )}
+//         </span>
+//         {/* end of star */}
+
+//         {/* star */}
+//         <span>
+//           {stars >= 4 ? (
+//             <BsStarFill />
+//           ) : stars >= 3.5 ? (
+//             <BsStarHalf />
+//           ) : (
+//             <BsStar />
+//           )}
+//         </span>
+//         {/* end of star */}
+
+//         {/* star */}
+//         <span>
+//           {stars >= 5 ? (
+//             <BsStarFill />
+//           ) : stars >= 4.5 ? (
+//             <BsStarHalf />
+//           ) : (
+//             <BsStar />
+//           )}
+//         </span>
+//         {/* end of star */}
