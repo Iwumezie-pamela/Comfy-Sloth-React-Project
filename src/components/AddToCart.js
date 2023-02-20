@@ -6,13 +6,15 @@ import { useCartContext } from '../context/cart_context'
 import AmountButtons from './AmountButtons'
 
 const AddToCart = ({ singleProductPage }) => {
+  const { addToCart } = useCartContext()
+
   //it controls the colors and also the number of product in stock meaning a buyer cannot buy more than what is available
   const { id, stock, colors } = singleProductPage
 
   const [mainColors, setMainColors] = useState(colors[0])
   const [amount, setAmount] = useState(1)
 
-  const handlePlus = () => {
+  const increase = () => {
     //handles the number of stock available so the customer won't order more than the available items in stock
     setAmount((prevAmount) => {
       let tempAmount = prevAmount + 1
@@ -22,7 +24,7 @@ const AddToCart = ({ singleProductPage }) => {
       return tempAmount
     })
   }
-  const handleMinus = () => {
+  const decrease = () => {
     //since there is no point in having 0 so if tempAmount is less than 1,tempAmount would be equal to 1
     setAmount((prevAmount) => {
       let tempAmount = prevAmount - 1
@@ -58,10 +60,14 @@ const AddToCart = ({ singleProductPage }) => {
       <div className='btn-container'>
         <AmountButtons
           amount={amount}
-          handleMinus={handleMinus}
-          handlePlus={handlePlus}
+          decrease={decrease}
+          increase={increase}
         />
-        <Link to='/cart' className='btn'>
+        <Link
+          to='/cart'
+          className='btn'
+          onClick={() => addToCart(id, mainColors, amount, singleProductPage)} //maincolors=color while singleProductPage=product
+        >
           Add to cart
         </Link>
       </div>
